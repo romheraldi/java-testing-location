@@ -13,11 +13,13 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.GnssStatus;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     LocationManager locationManager;
     ClipboardManager myClipboard;
     ClipData myClip;
+
+    GnssStatus.Callback mGnssStatusCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +124,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 }, 100);
             }
 
-            locationManager.addGpsStatusListener(this);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                mGnssStatusCallback = new GnssStatus.Callback() {
+                    //
+                };
+            } else {
+                locationManager.addGpsStatusListener(this);
+            }
 
             Integer gpsFreqInMillis = 5000;
             Integer gpsFreqInDistance = 10;  // in meters

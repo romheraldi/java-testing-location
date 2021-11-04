@@ -136,7 +136,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
         Log.d("LOCATION_CHANGE", "(" + location.getLatitude() + "," + location.getLongitude() + ")");
 
 //        Log.d("Check Location", String.valueOf(dataLat)+","+String.valueOf(dataLong) +" | "+ String.valueOf(location.getLatitude())+","+String.valueOf(location.getLongitude()));
@@ -167,6 +167,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 //            stopUpdateLocation();
 //        }
         Log.d("LOCATION TEST ", "STOP AT " + String.valueOf(dataDistance) + " m");
+        Toast.makeText(this, String.valueOf(dataDistance), Toast.LENGTH_LONG).show();
         stopUpdateLocation();
     }
 
